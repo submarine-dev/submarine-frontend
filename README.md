@@ -7,6 +7,12 @@
 - shadcn/ui
 
 ## Dockerを使用して起動
+
+※先にルートディレクトリに.envファイルを作成する必要があります。
+```bash
+cp .env.example .env
+```
+
 ```bash
 docker compose -f docker-compose.dev.yml build
 docker compose -f docker-compose.dev.yml up -d
