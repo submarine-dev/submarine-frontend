@@ -1,15 +1,23 @@
+FROM node:18-alpine as build-stage
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
 FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY package.json yarn.lock* ./
-RUN if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-    else echo "Warning: Lockfile not found. It is recommended to commit lockfiles to version control." && yarn install; \
-    fi
+COPY --from=build-stage /usr/src/app/.next ./.next
+COPY --from=build-stage /usr/src/app/public ./public
+COPY --from=build-stage /usr/src/app/package*.json ./
 
-COPY src ./src
-COPY public ./public
-COPY next.config.mjs .
-COPY tsconfig.json .
+RUN npm install
 
-CMD ["yarn", "dev"]
+EXPOSE 3000
+
+CMD ["npm", "start"]
