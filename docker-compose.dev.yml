@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   app:
     build:
@@ -6,13 +8,13 @@ services:
     image: submarine-frontend
     container_name: submarine-frontend
     ports:
-      - "3000:3000"
+      - '3000:3000'
     env_file:
       - .env
     volumes:
-      - ./src:/app/src
-      - ./public:/app/public
-      - node_modules:/app/node_modules
+      - ./src:/usr/src/app/src
+      - ./public:/usr/src/app/public
+      - node_modules:/usr/src/app/node_modules
     restart: always
     tty: true
     stdin_open: true
