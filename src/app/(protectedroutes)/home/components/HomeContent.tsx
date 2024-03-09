@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { FC } from 'react';
+import { SubscribedBoard } from './SubscribedBoard';
 
 /**
  * ログイントップ/content
@@ -30,7 +31,7 @@ const HomeContent: FC = () => {
 
   return (
     <div>
-      here is the home
+      <SubscribedBoard />
       <Button onClick={handleSearchSubscriptionClick}>
         サブスクを検索
       </Button>

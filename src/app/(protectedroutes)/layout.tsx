@@ -11,7 +11,7 @@ type Props = {
 const ProtectedRoutesLayout: FC<Props> = ({ children }) => {
   return (
     <div>
-      <div className="p-5">
+      <div className="p-3">
         <HeaderComponents />
         {children}
       </div>

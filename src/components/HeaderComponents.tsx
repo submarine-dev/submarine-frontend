@@ -28,7 +28,7 @@ export const HeaderComponents: FC = () => {
   const isNotHomePath = pathName !== '/home';
 
   return (
-    <header className="grid grid-cols-12 justify-center items-center pb-5">
+    <header className="grid grid-cols-12 justify-center items-center pb-3">
       <button
         onClick={handleClickBackScreen}
         type="button"
@@ -45,12 +45,7 @@ export const HeaderComponents: FC = () => {
         </H2>
       </div>
       <button type="button" className="col-span-1">
-        <Image
-          src={demoIconImage}
-          alt="userIcon"
-          width={40}
-          height={40}
-        />
+        <Image src={demoIconImage} alt="userIcon" />
       </button>
     </header>
   );
