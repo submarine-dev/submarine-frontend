@@ -1,25 +1,50 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { SubscriptionBaseType } from '@/types/SubscriptionBaseType';
+import { ContractedSubscriptionType } from '@/types/ContractedSubscriptionType';
+import { axiosFn } from '@/lib/axiosFn';
+import { SearchSubscriptionBoard } from './SearchSubscriptionBoard';
 
 /**
  * ログイントップ/content
  */
 const SearchSubscriptionContent: FC = () => {
-  const router = useRouter();
+  const [
+    contractedSubscriptions,
+    setContractedSubscriptions,
+  ] = useState<ContractedSubscriptionType[]>([]);
+  const [listOfSubscriptions, setListOfSubscriptions] =
+    useState<SubscriptionBaseType[]>([]);
 
   /**
-   * 戻るボタンクリック
+   * 初期ロード
+   * - ユーザの情報（契約しているサブスク・支払額）を取得
+   * - サブスクの一覧取得
    */
-  const handleClickBackScreen = (): void => {
-    router.back();
-  };
+  useEffect(() => {
+    (async () => {
+      const userRes = await axiosFn.get(
+        '/users/1/subscriptions'
+      );
+      const subscriptionsRes = await axiosFn.get(
+        '/subscriptions?results=10'
+      );
+
+      const newUserData = userRes.data.data;
+      const newSubscriptions =
+        subscriptionsRes.data.subscriptionMaster;
+
+      setContractedSubscriptions(newUserData.subscriptions);
+      setListOfSubscriptions(newSubscriptions);
+    })();
+  }, []);
 
   return (
     <div>
-      <Button onClick={handleClickBackScreen}>戻る</Button>
+      <SearchSubscriptionBoard
+        listOfSubscriptions={listOfSubscriptions}
+      />
     </div>
   );
 };
