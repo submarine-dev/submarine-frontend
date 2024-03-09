@@ -6,6 +6,7 @@ import { SubscribedBoard } from './SubscribedBoard';
 import { AddSubscriptionBoard } from './AddSubscriptionBoard';
 import { Body2Typo } from '@/components/Typography';
 import { SubscriptionBaseType } from '@/types/SubscriptionBaseType';
+import { axiosFn } from '@/lib/axiosFn';
 
 /**
  * ログイントップ/content
@@ -39,12 +40,10 @@ const HomeContent: FC = () => {
    */
   useEffect(() => {
     (async () => {
-      const response = await fetch(
-        '/api/mocks/subscriptions?results=10'
+      const res = await axiosFn.get(
+        '/subscriptions?results=10'
       );
-      const data = await response.json();
-      const newSubscriptions = data.subscriptionMaster;
-      console.log(newSubscriptions);
+      const newSubscriptions = res.data.subscriptionMaster;
       setListOfSubscriptions(newSubscriptions);
     })();
   }, []);
