@@ -18,7 +18,9 @@ export default function RootLayout({
     <html lang="ja">
       <body className={notoSansJP.className}>
         <div className="flex items-center justify-center">
-          <div className="max-w-md">{children}</div>
+          <div className="max-w-sm md:max-w-md">
+            {children}
+          </div>
         </div>
       </body>
     </html>
