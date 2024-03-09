@@ -9,7 +9,7 @@ type Props = {
  */
 export const BoardWrapper: FC<Props> = ({ children }) => {
   return (
-    <div className={`bg-white p-3 rounded-md`}>
+    <div className={`bg-white p-4 rounded-lg`}>
       {children}
     </div>
   );
