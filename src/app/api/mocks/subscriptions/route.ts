@@ -9,19 +9,21 @@ export async function GET(request: Request) {
         status: 405,
       });
     }
-    // ex: /api/mocks/subcriptions?results=10
-    const url = new URL(request.url);
-    const results = url.searchParams.get('results');
-    // もしNumberに変換できない文字列が渡された場合は、NaNが返る
-    const numResults = Number(results);
-    if (isNaN(numResults)) {
-      return new Response(
-        'results query parameter is invalid',
-        {
-          status: 400,
-        }
-      );
-    }
+    // // ex: /api/mocks/subcriptions?results=10
+    // const url = new URL(request.url);
+    // const results = url.searchParams.get('results');
+    // // もしNumberに変換できない文字列が渡された場合は、NaNが返る
+    // const numResults = Number(results);
+    // if (isNaN(numResults)) {
+    //   return new Response(
+    //     'results query parameter is invalid',
+    //     {
+    //       status: 400,
+    //     }
+    //   );
+    // }
+
+    const numResults = 10;
 
     const mockData = data;
     if (numResults) {
