@@ -4,13 +4,18 @@ import { SubscriptionSquare } from '@/components/SubscriptionSquare';
 import { SquareContent } from '@/components/SquareContent';
 import { IoIosSearch } from 'react-icons/io';
 import { getTextColor } from '@/util/getTextColor';
+import { SubscriptionBaseType } from '@/types/SubscriptionBaseType';
 
-type Props = {};
+type Props = {
+  listOfSubscriptions: SubscriptionBaseType[];
+};
 
 /**
  * サブスクの検索・追加をするボード
  */
-export const AddSubscriptionBoard: FC<Props> = ({}) => {
+export const AddSubscriptionBoard: FC<Props> = ({
+  listOfSubscriptions,
+}) => {
   return (
     <div className="flex space-x-2 overflow-x-auto">
       <SquareContent
@@ -18,17 +23,19 @@ export const AddSubscriptionBoard: FC<Props> = ({}) => {
         color="#FFFFFF"
         icon={<IoIosSearch size="25px" />}
       />
-      {[...Array(5)].map((_, index) => {
-        return (
-          <SubscriptionSquare
-            key={index}
-            label="YouTube Premium"
-            color="#FF0000"
-            iconUrl={demoIconImage}
-            index={index}
-          />
-        );
-      })}
+      {listOfSubscriptions.map(
+        (subscriptionItem, index) => {
+          return (
+            <SubscriptionSquare
+              key={subscriptionItem.subscriptionId}
+              label={subscriptionItem.subscriptionName}
+              color="#FFFFFF"
+              iconUrl={subscriptionItem.icon}
+              index={index}
+            />
+          );
+        }
+      )}
     </div>
   );
 };
