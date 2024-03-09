@@ -23,7 +23,6 @@ const ProtectedRoutesLayout: FC<Props> = ({ children }) => {
         <HeaderComponents />
         {children}
       </div>
-      <div></div>
       <div
         style={{
           position: 'fixed',
