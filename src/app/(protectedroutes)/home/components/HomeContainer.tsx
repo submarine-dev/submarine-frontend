@@ -4,7 +4,7 @@ import HomeContent from './HomeContent';
 /**
  * ホーム/container
  */
-const HomeContainer: FC = () => {
+const HomeContainer: FC = async () => {
   return <HomeContent />;
 };
 
