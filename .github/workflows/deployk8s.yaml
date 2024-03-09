@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - feature/fix_deploy_flow
 
 permissions:
   actions: write
@@ -21,18 +22,17 @@ jobs:
 
       - name: build docker image
         run: |
-          docker build -t ${{ secrets.HARBOR_REGISTRY }}/submarine/submarine-frontend:${{ github.sha }} .
+          docker build -t murasame29/submarine/submarine-frontend:${{ github.sha }} .
 
       - name: login to harbor registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
-          registry: ${{ secrets.HARBOR_REGISTRY }}
           username: ${{ secrets.HARBOR_USERNAME }}
           password: ${{ secrets.HARBOR_PASSWORD }}
 
       - name: push to harbor registry
         run: |
-          docker push ${{ secrets.HARBOR_REGISTRY }}/submarine/submarine-frontend:${{ github.sha }}
+          docker push murasame29/submarine/submarine-frontend:${{ github.sha }}
 
   deploy:
     needs: build
