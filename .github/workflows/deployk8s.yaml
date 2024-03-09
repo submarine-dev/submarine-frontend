@@ -19,11 +19,11 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v2
-      
+
       - name: build docker image
         run: |
           docker build -t ${{ secrets.HARBOR_REGISTRY }}/submarine/submarine-frontend:${{ github.sha }} .
-      
+
       - name: login to harbor registry
         uses: docker/login-action@v1
         with:
@@ -43,14 +43,14 @@ jobs:
         run: |
           sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
           sudo chmod a+x /usr/local/bin/yq
-      
+
       - name: checkout k8s-config repository
         uses: actions/checkout@v3
         with:
           repository: submarine-dev/k8s-config
           token: ${{ secrets.GH_PAT }}
           ref: master
-      
+
       - name: change manifest file
         run: |
           cd config
