@@ -61,7 +61,6 @@ const HomeContent: FC<Props> = ({}) => {
       const newSubscriptions =
         subscriptionsRes.data.subscriptionMaster;
 
-      console.log(newUserData);
       setTotalPayment(newUserData.totalPayment);
       setContractedSubscriptions(newUserData.subscriptions);
       setListOfSubscriptions(newSubscriptions);
