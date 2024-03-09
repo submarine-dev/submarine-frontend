@@ -22,8 +22,6 @@ export const SquareContent: FC<Props> = ({
   onClick,
 }) => {
   const textColor = getTextColor(color) ? 'black' : 'white';
-  console.log('textColor', textColor, label);
-
   return (
     <button
       onClick={onClick && (() => onClick(index ?? 0))}
