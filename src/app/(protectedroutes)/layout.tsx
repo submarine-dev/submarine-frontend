@@ -1,0 +1,33 @@
+import { HeaderComponents } from '@/components/HeaderComponents';
+import { FC, ReactNode } from 'react';
+
+type Props = {
+  children: ReactNode;
+};
+
+/**
+ * 認証済みルートのレイアウト
+ */
+const ProtectedRoutesLayout: FC<Props> = ({ children }) => {
+  return (
+    <div>
+      <div className="p-5">
+        <HeaderComponents />
+        {children}
+      </div>
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          width: '100%',
+          height: '30dvh',
+          borderRadius: '0 0 5% 5%',
+          zIndex: -1,
+        }}
+        className="bg-primary max-w-md"
+      />
+    </div>
+  );
+};
+
+export default ProtectedRoutesLayout;
