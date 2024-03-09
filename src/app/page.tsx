@@ -1,9 +1,11 @@
-import { Button } from '@/components/ui/button';
+import { NextPage } from 'next';
+import IndexContainer from './components/IndexContainer';
 
-export default function Home() {
-  return (
-    <main>
-      <Button>Hello World</Button>
-    </main>
-  );
-}
+/**
+ * ログイントップ
+ */
+const IndexPage: NextPage = () => {
+  return <IndexContainer />;
+};
+
+export default IndexPage;
