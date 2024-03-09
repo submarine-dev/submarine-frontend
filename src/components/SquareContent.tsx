@@ -22,8 +22,6 @@ export const SquareContent: FC<Props> = ({
   onClick,
 }) => {
   const textColor = getTextColor(color) ? 'black' : 'white';
-  console.log('textColor', textColor, label);
-
   return (
     <button
       onClick={onClick && (() => onClick(index ?? 0))}
@@ -37,7 +35,7 @@ export const SquareContent: FC<Props> = ({
         isCenter
         color={textColor}
         style={{
-          maxHeight: '2.2rem',
+          height: '2.2rem',
           width: '100%',
           overflow: 'hidden',
         }}
