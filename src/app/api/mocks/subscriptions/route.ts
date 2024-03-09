@@ -1,6 +1,6 @@
 'use strict';
 
-import { data } from '../subscriptions/data';
+import { data } from './data';
 
 export async function GET(request: Request) {
   try {
