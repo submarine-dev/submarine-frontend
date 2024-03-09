@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 import { SubscribedBoard } from './SubscribedBoard';
+import { AddSubscriptionBoard } from './AddSubscriptionBoard';
+import { Body2Typo } from '@/components/Typography';
 
 /**
  * ログイントップ/content
@@ -30,26 +32,12 @@ const HomeContent: FC = () => {
   };
 
   return (
-    <div>
+    <div className="space-y-3">
       <SubscribedBoard />
-      <Button onClick={handleSearchSubscriptionClick}>
-        サブスクを検索
-      </Button>
-      {[...Array(3)].map((_, index) => {
-        return (
-          <Button
-            /*
-             * TODO: 仮置きなのでindexをkeyにしている
-             */
-            key={index}
-            onClick={() =>
-              handleClickSubscription(index.toString())
-            }
-          >
-            {index}のサブスク
-          </Button>
-        );
-      })}
+      <div className="space-y-2">
+        <Body2Typo>サブスクを追加</Body2Typo>
+        <AddSubscriptionBoard />
+      </div>
     </div>
   );
 };

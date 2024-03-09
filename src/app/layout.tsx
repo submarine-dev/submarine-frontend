@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={notoSansJP.className}>
         <div className="flex items-center justify-center">
           <AuthProvider>
-            <div className="max-w-md">{children}</div>
+            <div className="max-w-sm md:max-w-md">{children}</div>
           </AuthProvider>
         </div>
       </body>
