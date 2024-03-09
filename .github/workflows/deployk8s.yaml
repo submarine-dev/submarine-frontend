@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - develop
-      - feature/fix_deploy_flow
+      - feature/fix_registry
 
 permissions:
   actions: write
