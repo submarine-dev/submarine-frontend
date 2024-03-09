@@ -13,7 +13,8 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
     const results = url.searchParams.get('results');
     // もしNumberに変換できない文字列が渡された場合は、NaNが返る
-    if (Number.isNaN(results)) {
+    const numResults = Number(results);
+    if (isNaN(numResults)) {
       return new Response(
         'results query parameter is invalid',
         {
@@ -23,7 +24,6 @@ export async function GET(request: Request) {
     }
 
     const mockData = data;
-    const numResults = Number(results);
     if (numResults) {
       const sliceNum =
         numResults > mockData.subscriptionMaster.length
