@@ -35,7 +35,7 @@ export const SquareContent: FC<Props> = ({
         isCenter
         color={textColor}
         style={{
-          maxHeight: '2.2rem',
+          height: '2.2rem',
           width: '100%',
           overflow: 'hidden',
         }}
