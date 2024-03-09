@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: ['main', 'develop']
+  pull_request:
+    branches: ['main', 'develop']
+
+jobs:
+  setup:
+    name: Setup & Install dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+    outputs:
+      cache-key: ${{ steps.cache-dependencies.outputs.cache-key }}
+
+  build-and-lint:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        task: ['build', 'lint']
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Task
+        run: npm run ${{ matrix.task }}
+        continue-on-error: ${{ matrix.task == 'lint' }}
