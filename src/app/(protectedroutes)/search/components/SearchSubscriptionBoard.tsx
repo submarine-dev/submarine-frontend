@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 import { IoMdSearch } from 'react-icons/io';
+import Loader from '@/components/features/Loader';
 
 type Props = {
   listOfSubscriptions: SubscriptionBaseType[];
@@ -21,10 +22,11 @@ type Props = {
 export const SearchSubscriptionBoard: FC<Props> = ({
   listOfSubscriptions,
 }) => {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState<string>('');
   const [searchResults, setSearchResults] = useState<
     SubscriptionBaseType[]
   >([]);
+  const [isloading, setIsLoading] = useState<boolean>(true);
   const searchHandler = () => {
     if (searchText === '') {
       setSearchResults(listOfSubscriptions);
@@ -52,7 +54,9 @@ export const SearchSubscriptionBoard: FC<Props> = ({
   };
 
   useEffect(() => {
+    setIsLoading(true);
     setSearchResults(listOfSubscriptions);
+    setIsLoading(false);
   }, [listOfSubscriptions]);
 
   return (
@@ -75,63 +79,77 @@ export const SearchSubscriptionBoard: FC<Props> = ({
           className="w-[100%] pl-8"
         />
       </div>
-      {searchResults.length === 0 && (
+      {isloading && (
+        <div className="text-center">
+          <Loader className="text-primary w-10 h-10" />
+        </div>
+      )}
+      {!isloading &&
+      searchResults.length === 0 &&
+      listOfSubscriptions.length === 0 ? (
         <p className="m-3">
           該当するサブスクリプションは見つかりませんでした
         </p>
+      ) : (
+        <ScrollArea className="my-4">
+          <div className="grid grid-cols-3 gap-1">
+            {searchResults.map(
+              (subscriptionItem, index) => {
+                return (
+                  <Drawer
+                    key={subscriptionItem.subscriptionId}
+                  >
+                    <DrawerTrigger asChild>
+                      <SubscriptionSquare
+                        label={
+                          subscriptionItem.subscriptionName
+                        }
+                        color="#FFFFFF"
+                        iconUrl={subscriptionItem.icon}
+                        index={index}
+                      />
+                    </DrawerTrigger>
+                    <DrawerContent>
+                      <p className="mx-5 pb-2">
+                        新しいサブスクリプションを追加
+                      </p>
+                      <div className="border-b flex gap-2 mx-5 pb-2">
+                        <Image
+                          src={subscriptionItem.icon}
+                          alt={'サブスクアイコン'}
+                          width={24}
+                          height={24}
+                        />
+                        <p>
+                          {
+                            subscriptionItem.subscriptionName
+                          }
+                        </p>
+                      </div>
+                      <div className="flex flex-col items-center gap-4 p-5">
+                        <DrawerClose className="w-full flex justify-center gap-4">
+                          <Button
+                            variant="outline"
+                            className="w-[30%]"
+                          >
+                            キャンセル
+                          </Button>
+                          <Button
+                            onClick={() => {}}
+                            className="w-[30%]"
+                          >
+                            追加する
+                          </Button>
+                        </DrawerClose>
+                      </div>
+                    </DrawerContent>
+                  </Drawer>
+                );
+              }
+            )}
+          </div>
+        </ScrollArea>
       )}
-      <ScrollArea className="my-4">
-        <div className="grid grid-cols-3 gap-1">
-          {searchResults.map((subscriptionItem, index) => {
-            return (
-              <Drawer key={subscriptionItem.subscriptionId}>
-                <DrawerTrigger asChild>
-                  <SubscriptionSquare
-                    label={
-                      subscriptionItem.subscriptionName
-                    }
-                    color="#FFFFFF"
-                    iconUrl={subscriptionItem.icon}
-                    index={index}
-                  />
-                </DrawerTrigger>
-                <DrawerContent>
-                  <p className="mx-5 pb-2">
-                    新しいサブスクリプションを追加
-                  </p>
-                  <div className="border-b flex gap-2 mx-5 pb-2">
-                    <Image
-                      src={subscriptionItem.icon}
-                      alt={'サブスクアイコン'}
-                      width={24}
-                      height={24}
-                    />
-                    <p>
-                      {subscriptionItem.subscriptionName}
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-center gap-4 p-5">
-                    <DrawerClose className="w-full flex justify-center gap-4">
-                      <Button
-                        variant="outline"
-                        className="w-[30%]"
-                      >
-                        キャンセル
-                      </Button>
-                      <Button
-                        onClick={() => {}}
-                        className="w-[30%]"
-                      >
-                        追加する
-                      </Button>
-                    </DrawerClose>
-                  </div>
-                </DrawerContent>
-              </Drawer>
-            );
-          })}
-        </div>
-      </ScrollArea>
     </BoardWrapper>
   );
 };
