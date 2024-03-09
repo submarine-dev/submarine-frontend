@@ -16,6 +16,12 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_ENV: prod
+      NEXT_PUBLIC_MOCK_API_MODE: true
+      NEXT_PUBLIC_MOCK_API_URL: ${{ secrets.NEXT_PUBLIC_MOCK_API_URL }}
+      NEXT_PUBLIC_LOCAL_API_URL: ${{ secrets.NEXT_PUBLIC_LOCAL_API_URL }}
+      NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
     steps:
       - name: checkout code
         uses: actions/checkout@v2
@@ -37,6 +43,12 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_ENV: dev
+      NEXT_PUBLIC_MOCK_API_MODE: true
+      NEXT_PUBLIC_MOCK_API_URL: ${{ secrets.NEXT_PUBLIC_MOCK_API_URL }}
+      NEXT_PUBLIC_LOCAL_API_URL: ${{ secrets.NEXT_PUBLIC_LOCAL_API_URL }}
+      NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
     steps:
       - name: install yq
         run: |
