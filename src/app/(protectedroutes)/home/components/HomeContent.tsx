@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 import { SubscribedBoard } from './SubscribedBoard';

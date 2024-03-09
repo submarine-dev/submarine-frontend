@@ -6,6 +6,14 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import Image from 'next/image';
 import demoIconImage from './demoicon.png';
 import { usePathname, useRouter } from 'next/navigation';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTrigger,
+} from '@/components/ui/drawer';
+import { Button } from './ui/button';
+import { logout } from '@/lib/firebase/auth';
 
 /**
  * ヘッダー
@@ -44,9 +52,26 @@ export const HeaderComponents: FC = () => {
           Submarine
         </H2>
       </div>
-      <button type="button" className="col-span-1">
-        <Image src={demoIconImage} alt="userIcon" />
-      </button>
+      <Drawer>
+        <DrawerTrigger asChild>
+          <Button size="icon" className="col-span-1">
+            <Image src={demoIconImage} alt="userIcon" />
+          </Button>
+        </DrawerTrigger>
+        <DrawerContent>
+          <p className="border-b mx-5 pb-2">ログアウト</p>
+          <div className="flex flex-col items-center gap-4 p-5">
+            <Button onClick={logout} className="w-[50%]">
+              ログアウト
+            </Button>
+            <DrawerClose className="w-[50%]">
+              <Button variant="outline" className="w-full">
+                キャンセル
+              </Button>
+            </DrawerClose>
+          </div>
+        </DrawerContent>
+      </Drawer>
     </header>
   );
 };
