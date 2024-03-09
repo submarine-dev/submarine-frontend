@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { SubscriptionSquare } from '@/components/SubscriptionSquare';
 import { SubscriptionBaseType } from '@/types/SubscriptionBaseType';
 import { BoardWrapper } from '@/components/BoardWrapper';
@@ -21,75 +21,115 @@ type Props = {
 export const SearchSubscriptionBoard: FC<Props> = ({
   listOfSubscriptions,
 }) => {
+  const [searchText, setSearchText] = useState('');
+  const [searchResults, setSearchResults] = useState<
+    SubscriptionBaseType[]
+  >([]);
+  const searchHandler = () => {
+    if (searchText === '') {
+      setSearchResults(listOfSubscriptions);
+      return;
+    }
+    const newSearchResults: SubscriptionBaseType[] =
+      listOfSubscriptions.filter(
+        (data) =>
+          data.subscriptionName
+            .toUpperCase()
+            .includes(searchText) ||
+          (data.subscriptionName
+            .toLowerCase()
+            .includes(searchText) &&
+            data)
+      );
+    setSearchResults(newSearchResults);
+  };
+
+  // inputでEnterを押した時に検索を実行
+  const handleKeyDown = (e: string) => {
+    if (e === 'Enter') {
+      searchHandler();
+    }
+  };
+
+  useEffect(() => {
+    setSearchResults(listOfSubscriptions);
+  }, [listOfSubscriptions]);
+
   return (
     <BoardWrapper>
       <div className="flex justify-center items-center relative">
         <button
-          onClick={() => {}}
+          onClick={() => searchHandler()}
           className="absolute left-2"
         >
           <IoMdSearch size="20px" />
         </button>
         <Input
           type="search"
+          value={searchText}
+          onKeyDown={(event) => handleKeyDown(event.key)}
+          onChange={(event) =>
+            setSearchText(event.target.value)
+          }
           placeholder="サブスクリプションを検索"
           className="w-[100%] pl-8"
         />
       </div>
+      {searchResults.length === 0 && (
+        <p className="m-3">
+          該当するサブスクリプションは見つかりませんでした
+        </p>
+      )}
       <ScrollArea className="my-4">
         <div className="grid grid-cols-3 gap-1">
-          {listOfSubscriptions.map(
-            (subscriptionItem, index) => {
-              return (
-                <Drawer
-                  key={subscriptionItem.subscriptionId}
-                >
-                  <DrawerTrigger asChild>
-                    <SubscriptionSquare
-                      label={
-                        subscriptionItem.subscriptionName
-                      }
-                      color="#FFFFFF"
-                      iconUrl={subscriptionItem.icon}
-                      index={index}
+          {searchResults.map((subscriptionItem, index) => {
+            return (
+              <Drawer key={subscriptionItem.subscriptionId}>
+                <DrawerTrigger asChild>
+                  <SubscriptionSquare
+                    label={
+                      subscriptionItem.subscriptionName
+                    }
+                    color="#FFFFFF"
+                    iconUrl={subscriptionItem.icon}
+                    index={index}
+                  />
+                </DrawerTrigger>
+                <DrawerContent>
+                  <p className="mx-5 pb-2">
+                    新しいサブスクリプションを追加
+                  </p>
+                  <div className="border-b flex gap-2 mx-5 pb-2">
+                    <Image
+                      src={subscriptionItem.icon}
+                      alt={'サブスクアイコン'}
+                      width={24}
+                      height={24}
                     />
-                  </DrawerTrigger>
-                  <DrawerContent>
-                    <p className="mx-5 pb-2">
-                      新しいサブスクリプションを追加
+                    <p>
+                      {subscriptionItem.subscriptionName}
                     </p>
-                    <div className="border-b flex gap-2 mx-5 pb-2">
-                      <Image
-                        src={subscriptionItem.icon}
-                        alt={'サブスクアイコン'}
-                        width={24}
-                        height={24}
-                      />
-                      <p>
-                        {subscriptionItem.subscriptionName}
-                      </p>
-                    </div>
-                    <div className="flex flex-col items-center gap-4 p-5">
-                      <DrawerClose className="w-full flex justify-center gap-4">
-                        <Button
-                          variant="outline"
-                          className="w-[30%]"
-                        >
-                          キャンセル
-                        </Button>
-                        <Button
-                          onClick={() => {}}
-                          className="w-[30%]"
-                        >
-                          追加する
-                        </Button>
-                      </DrawerClose>
-                    </div>
-                  </DrawerContent>
-                </Drawer>
-              );
-            }
-          )}
+                  </div>
+                  <div className="flex flex-col items-center gap-4 p-5">
+                    <DrawerClose className="w-full flex justify-center gap-4">
+                      <Button
+                        variant="outline"
+                        className="w-[30%]"
+                      >
+                        キャンセル
+                      </Button>
+                      <Button
+                        onClick={() => {}}
+                        className="w-[30%]"
+                      >
+                        追加する
+                      </Button>
+                    </DrawerClose>
+                  </div>
+                </DrawerContent>
+              </Drawer>
+            );
+          })}
         </div>
       </ScrollArea>
     </BoardWrapper>
