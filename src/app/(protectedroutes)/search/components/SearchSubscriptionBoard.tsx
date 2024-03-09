@@ -10,7 +10,9 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import Image from 'next/image';
+import { IoMdSearch } from 'react-icons/io';
 
 type Props = {
   listOfSubscriptions: SubscriptionBaseType[];
@@ -21,7 +23,20 @@ export const SearchSubscriptionBoard: FC<Props> = ({
 }) => {
   return (
     <BoardWrapper>
-      <ScrollArea>
+      <div className="flex justify-center items-center relative">
+        <button
+          onClick={() => {}}
+          className="absolute left-2"
+        >
+          <IoMdSearch size="20px" />
+        </button>
+        <Input
+          type="search"
+          placeholder="サブスクリプションを検索"
+          className="w-[100%] pl-8"
+        />
+      </div>
+      <ScrollArea className="my-4">
         <div className="grid grid-cols-3 gap-1">
           {listOfSubscriptions.map(
             (subscriptionItem, index) => {
