@@ -2,10 +2,6 @@
 
 import { HeaderComponents } from '@/components/HeaderComponents';
 import AuthenticatedLayout from '@/components/functions/auth/AuthenticatedLayout';
-import { useAuth } from '@/components/functions/context/auth';
-import { Button } from '@/components/ui/button';
-import { logout } from '@/lib/firebase/auth';
-import Image from 'next/image';
 import { FC, ReactNode } from 'react';
 
 type Props = {
