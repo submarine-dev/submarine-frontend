@@ -3,8 +3,7 @@ name: build and change manifest
 on:
   push:
     branches:
-      - master
-      - feature/deploy_k8s
+      - develop
 
 permissions:
   actions: write
