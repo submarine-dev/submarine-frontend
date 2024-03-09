@@ -1,28 +1,18 @@
 'use client';
 
+import UnauthenticatedLayout from '@/components/functions/auth/UnauthenticatedLayout';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
+import { login } from '@/lib/firebase/auth';
 import { FC } from 'react';
 
 /**
  * ログイントップ/content
  */
 const IndexContent: FC = () => {
-  const router = useRouter();
-
-  /**
-   * Googleログインボタンクリック
-   */
-  const handleSignButtonClick = (): void => {
-    router.push('/home');
-  };
-
   return (
-    <div>
-      <Button onClick={handleSignButtonClick}>
-        Sign With Google
-      </Button>
-    </div>
+    <UnauthenticatedLayout>
+      <Button onClick={login}>Sign With Google</Button>
+    </UnauthenticatedLayout>
   );
 };
 
