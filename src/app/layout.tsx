@@ -18,11 +18,13 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={notoSansJP.className}>
-        <div className="flex items-center justify-center">
-          <AuthProvider>
-            <div className="max-w-sm md:max-w-md">{children}</div>
-          </AuthProvider>
-        </div>
+        <AuthProvider>
+          <div className="flex items-center justify-center h-[100vh] bg-gradient-to-t from-[#0B1C31] to-primary">
+            <div className="max-w-sm md:max-w-md">
+              {children}
+            </div>
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );
