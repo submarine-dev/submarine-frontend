@@ -22,7 +22,7 @@ jobs:
 
       - name: build docker image
         run: |
-          docker build -t murasame29/submarine/submarine-frontend:${{ github.sha }} .
+          docker build -t ${{ secrets.HARBOR_USERNAME }}/submarine:${{ github.sha }} .
 
       - name: login to harbor registry
         uses: docker/login-action@v3
@@ -32,7 +32,7 @@ jobs:
 
       - name: push to harbor registry
         run: |
-          docker push murasame29/submarine/submarine-frontend:${{ github.sha }}
+          docker push ${{ secrets.HARBOR_USERNAME }}/submarine:${{ github.sha }}
 
   deploy:
     needs: build
