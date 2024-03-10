@@ -4,7 +4,6 @@
 import { FC } from 'react';
 import { H2 } from './Typography';
 import { IoMdArrowRoundBack } from 'react-icons/io';
-import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   Drawer,

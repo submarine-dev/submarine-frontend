@@ -3,6 +3,7 @@ import {
   BodyTypo,
 } from '@/components/Typography';
 import { ContractedSubscriptionType } from '@/types/ContractedSubscriptionType';
+import { addCommasToNumber } from '@/util/addCommasToNumber';
 import Image from 'next/image';
 import { FC } from 'react';
 
@@ -50,7 +51,10 @@ export const ContractedSubscriptionsRow: FC<Props> = ({
           </div>
           <div className="col-span-2 pt-1">
             <BodyTypo>
-              {contractedSubscription.monthlyPrice}円
+              {addCommasToNumber(
+                contractedSubscription.monthlyPrice
+              )}
+              円
             </BodyTypo>
           </div>
         </div>
