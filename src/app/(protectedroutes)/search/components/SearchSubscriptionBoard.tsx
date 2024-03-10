@@ -13,7 +13,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 import { IoMdSearch } from 'react-icons/io';
-import Loader from '@/components/features/Loader';
 
 type Props = {
   listOfSubscriptions: SubscriptionBaseType[];
@@ -26,23 +25,18 @@ export const SearchSubscriptionBoard: FC<Props> = ({
   const [searchResults, setSearchResults] = useState<
     SubscriptionBaseType[]
   >([]);
-  const [isloading, setIsLoading] = useState<boolean>(true);
   const searchHandler = () => {
+    const searchTextLowerCase = searchText.toLowerCase();
     if (searchText === '') {
       setSearchResults(listOfSubscriptions);
       return;
     }
-    const newSearchResults: SubscriptionBaseType[] =
-      listOfSubscriptions.filter(
-        (data) =>
-          data.subscriptionName
-            .toUpperCase()
-            .includes(searchText) ||
-          (data.subscriptionName
-            .toLowerCase()
-            .includes(searchText) &&
-            data)
-      );
+    const newSearchResults = listOfSubscriptions.filter(
+      (data) =>
+        data.subscriptionName
+          .toLowerCase()
+          .includes(searchTextLowerCase)
+    );
     setSearchResults(newSearchResults);
   };
 
@@ -54,9 +48,7 @@ export const SearchSubscriptionBoard: FC<Props> = ({
   };
 
   useEffect(() => {
-    setIsLoading(true);
     setSearchResults(listOfSubscriptions);
-    setIsLoading(false);
   }, [listOfSubscriptions]);
 
   return (
