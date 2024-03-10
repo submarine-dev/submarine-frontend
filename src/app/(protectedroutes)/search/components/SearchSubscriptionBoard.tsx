@@ -25,6 +25,11 @@ export const SearchSubscriptionBoard: FC<Props> = ({
   const [searchResults, setSearchResults] = useState<
     SubscriptionBaseType[]
   >([]);
+  const [
+    selectedSubscriptionPlanId,
+    setSelectedSubscriptionPlanId,
+  ] = useState<string | null>(null);
+
   const searchHandler = () => {
     const searchTextLowerCase = searchText.toLowerCase();
     if (searchText === '') {
@@ -114,6 +119,16 @@ export const SearchSubscriptionBoard: FC<Props> = ({
                         </p>
                       </div>
                       <div className="flex flex-col items-center gap-4 p-5">
+                        <div className="w-full flex flex-col justify-center gap-2">
+                          <Button
+                            className=""
+                            onClick={() => {}}
+                          >
+                            プラン1
+                          </Button>
+                          <Button>プラン2</Button>
+                          <Button>プラン3</Button>
+                        </div>
                         <DrawerClose className="w-full flex justify-center gap-4">
                           <Button
                             variant="outline"
@@ -122,6 +137,10 @@ export const SearchSubscriptionBoard: FC<Props> = ({
                             キャンセル
                           </Button>
                           <Button
+                            disabled={
+                              selectedSubscriptionPlanId ===
+                              null
+                            }
                             onClick={() => {}}
                             className="w-[30%]"
                           >
