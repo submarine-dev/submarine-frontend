@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import { FC } from 'react';
@@ -56,7 +57,7 @@ export const HeaderComponents: FC = () => {
       <Drawer>
         <DrawerTrigger asChild>
           <Button size="icon" className="col-span-1">
-            <Image
+            <img
               src={fbUser?.photoURL ?? ''}
               alt={fbUser?.displayName ?? 'userName'}
               width={35}
