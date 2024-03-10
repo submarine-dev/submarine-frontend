@@ -5,7 +5,7 @@ import { SquareContent } from './SquareContent';
 type Props = {
   index: number;
   label: string;
-  color: `#${string}`;
+  color: string;
   iconUrl: string | StaticImageData;
   onClick?: (index: number) => void;
 };
@@ -26,12 +26,14 @@ export const SubscriptionSquare: FC<Props> = ({
       label={label}
       color={color}
       icon={
-        <Image
-          src={iconUrl}
-          alt={label}
-          width={30}
-          height={30}
-        />
+        <div className="rounded-full bg-gray-100 p-1">
+          <Image
+            src={iconUrl}
+            alt={label}
+            width={25}
+            height={25}
+          />
+        </div>
       }
       onClick={onClick}
     />
