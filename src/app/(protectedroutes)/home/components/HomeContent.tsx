@@ -72,6 +72,7 @@ const HomeContent: FC<Props> = ({}) => {
       <SubscribedBoard
         totalPayment={totalPayment}
         contractedSubscriptions={contractedSubscriptions}
+        handleSelectSubscription={handleClickSubscription}
       />
       <div className="space-y-2">
         <Body2Typo>サブスクを追加</Body2Typo>
