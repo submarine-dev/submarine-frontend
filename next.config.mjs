@@ -11,6 +11,7 @@ const nextConfig = {
       'www.primevideo.com',
       'www.spotify.com',
       'www.disneyplus.com',
+      'submarine.hack-portal.com',
     ],
   },
 };
