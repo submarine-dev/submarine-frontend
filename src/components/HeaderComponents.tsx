@@ -49,7 +49,7 @@ export const HeaderComponents: FC = () => {
         ) : null}
       </button>
       <div className="col-span-10">
-        <H2 isCenter color="white">
+        <H2 isCenter color="white" className="text-white">
           Submarine
         </H2>
       </div>
