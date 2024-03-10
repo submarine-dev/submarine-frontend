@@ -79,14 +79,9 @@ export const SearchSubscriptionBoard: FC<Props> = ({
           className="w-[100%] pl-8"
         />
       </div>
-      {isloading && (
-        <div className="text-center">
-          <Loader className="text-primary w-10 h-10" />
-        </div>
-      )}
-      {!isloading &&
-      searchResults.length === 0 &&
-      listOfSubscriptions.length === 0 ? (
+      {searchResults.length === 0 &&
+      listOfSubscriptions.length === 0 &&
+      searchText !== '' ? (
         <p className="m-3">
           該当するサブスクリプションは見つかりませんでした
         </p>
