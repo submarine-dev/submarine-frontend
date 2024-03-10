@@ -24,7 +24,7 @@ const IndexContent: FC = () => {
             className="my-10"
           >
             <Image
-              src={'https://submarine.hack-portal.com/google-icon.png'}
+              src={'/google-icon.png'}
               alt={'google icon'}
               width={20}
               height={20}
