@@ -26,13 +26,6 @@ const HomeContent: FC<Props> = ({}) => {
     useState<SubscriptionBaseType[]>([]);
 
   /**
-   * サブスク検索ボタンクリック
-   */
-  const handleSearchSubscriptionClick = (): void => {
-    router.push('/search');
-  };
-
-  /**
    * サブスクのクリック
    *
    * @param subscriptionId サブスクID
