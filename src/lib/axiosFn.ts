@@ -4,7 +4,7 @@ const isMockApiMode =
   process.env.NEXT_PUBLIC_MOCK_API_MODE === 'true';
 const apiUrl = isMockApiMode
   ? process.env.NEXT_PUBLIC_MOCK_API_URL
-  : process.env.NEXT_PUBLIC_LOCAL_API_URL;
+  : process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export const axiosFn = new Axios({
   baseURL: apiUrl,
