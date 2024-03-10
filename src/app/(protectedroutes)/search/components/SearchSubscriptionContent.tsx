@@ -28,7 +28,7 @@ const SearchSubscriptionContent: FC = () => {
         '/users/1/subscriptions'
       );
       const subscriptionsRes = await axiosFn.get(
-        '/subscriptions?results=10'
+        '/subscriptions'
       );
 
       const newUserData = userRes.data.data;
