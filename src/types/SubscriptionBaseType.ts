@@ -5,4 +5,5 @@ export type SubscriptionBaseType = {
   subscriptionId: string;
   subscriptionName: string;
   icon: string;
+  color: string;
 };

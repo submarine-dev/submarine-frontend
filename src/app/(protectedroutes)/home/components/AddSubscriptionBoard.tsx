@@ -29,7 +29,7 @@ export const AddSubscriptionBoard: FC<Props> = ({
             <SubscriptionSquare
               key={subscriptionItem.subscriptionId}
               label={subscriptionItem.subscriptionName}
-              color="#FFFFFF"
+              color={subscriptionItem.color}
               iconUrl={subscriptionItem.icon}
               index={index}
             />
