@@ -7,6 +7,9 @@ import { ContractedSubscriptionsRow } from './SubscribedBoard/ContractedSubscrip
 type Props = {
   totalPayment: number;
   contractedSubscriptions: ContractedSubscriptionType[];
+  handleSelectSubscription: (
+    subscriptionId: string
+  ) => void;
 };
 
 /**
@@ -15,6 +18,7 @@ type Props = {
 export const SubscribedBoard: FC<Props> = ({
   totalPayment,
   contractedSubscriptions,
+  handleSelectSubscription,
 }) => {
   return (
     <BoardWrapper>
@@ -30,6 +34,9 @@ export const SubscribedBoard: FC<Props> = ({
                 key={contractedSubscription.subscriptionId}
                 contractedSubscription={
                   contractedSubscription
+                }
+                handleSelectSubscription={
+                  handleSelectSubscription
                 }
               />
             )

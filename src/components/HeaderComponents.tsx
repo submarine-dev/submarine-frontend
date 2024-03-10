@@ -4,7 +4,6 @@ import { FC } from 'react';
 import { H2 } from './Typography';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import Image from 'next/image';
-import demoIconImage from './demoicon.png';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   Drawer,
@@ -14,11 +13,13 @@ import {
 } from '@/components/ui/drawer';
 import { Button } from './ui/button';
 import { logout } from '@/lib/firebase/auth';
+import { useAuth } from './functions/context/auth';
 
 /**
  * ヘッダー
  */
 export const HeaderComponents: FC = () => {
+  const { fbUser } = useAuth();
   const router = useRouter();
   const pathName = usePathname();
 
@@ -36,7 +37,7 @@ export const HeaderComponents: FC = () => {
   const isNotHomePath = pathName !== '/home';
 
   return (
-    <header className="grid grid-cols-12 justify-center items-center pb-3">
+    <header className="grid grid-cols-12 justify-center items-center pb-3 pr-4">
       <button
         onClick={handleClickBackScreen}
         type="button"
@@ -44,18 +45,24 @@ export const HeaderComponents: FC = () => {
         disabled={!isNotHomePath}
       >
         {isNotHomePath ? (
-          <IoMdArrowRoundBack className="p-1 w-full h-full text-white" />
+          <IoMdArrowRoundBack className="p-1 w-full h-full bg-white rounded-full" />
         ) : null}
       </button>
       <div className="col-span-10">
-        <H2 isCenter color="white">
+        <H2 isCenter color="white" className="text-white">
           Submarine
         </H2>
       </div>
       <Drawer>
         <DrawerTrigger asChild>
           <Button size="icon" className="col-span-1">
-            <Image src={demoIconImage} alt="userIcon" />
+            <Image
+              src={fbUser?.photoURL ?? ''}
+              alt={fbUser?.displayName ?? 'userName'}
+              width={35}
+              height={35}
+              className="rounded-full"
+            />
           </Button>
         </DrawerTrigger>
         <DrawerContent>

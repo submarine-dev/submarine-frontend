@@ -14,7 +14,7 @@ type Props = {
 const ProtectedRoutesLayout: FC<Props> = ({ children }) => {
   return (
     <AuthenticatedLayout>
-      <div className="p-3">
+      <div className="p-3 max-w-md mx-auto">
         <HeaderComponents />
         {children}
       </div>

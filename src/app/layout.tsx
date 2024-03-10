@@ -19,9 +19,10 @@ export default function RootLayout({
     <html lang="ja">
       <body className={notoSansJP.className}>
         <AuthProvider>
-          <div className="max-w-sm md:max-w-md">
-            {children}
-          </div>
+          {/* PC */}
+          <div className="hidden sm:block">{children}</div>
+          {/* モバイル */}
+          <div className="block sm:hidden">{children}</div>
         </AuthProvider>
       </body>
     </html>

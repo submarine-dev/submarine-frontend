@@ -5,7 +5,7 @@ import { FC, ReactNode } from 'react';
 
 type Props = {
   label: string;
-  color: `#${string}`;
+  color: string;
   icon: ReactNode;
   index?: number;
   onClick?: (index: number) => void;
