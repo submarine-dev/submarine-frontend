@@ -3,6 +3,7 @@ import {
   Body2Typo,
   BodyTypo,
 } from '@/components/Typography';
+import { addCommasToNumber } from '@/util/addCommasToNumber';
 import { FC } from 'react';
 
 type Props = {
@@ -27,7 +28,9 @@ export const ContractedSubscriptionBoard: FC<Props> = ({
             <BodyTypo>{plan}</BodyTypo>
           </div>
           <div className="col-span-3 flex justify-end">
-            <BodyTypo>{monthlyPrice}円</BodyTypo>
+            <BodyTypo>
+              {addCommasToNumber(monthlyPrice)}円
+            </BodyTypo>
           </div>
         </div>
         <div>
