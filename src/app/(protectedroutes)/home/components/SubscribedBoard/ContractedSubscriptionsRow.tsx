@@ -8,6 +8,9 @@ import { FC } from 'react';
 
 type Props = {
   contractedSubscription: ContractedSubscriptionType;
+  handleSelectSubscription: (
+    subscriptionId: string
+  ) => void;
 };
 
 /**
@@ -15,9 +18,18 @@ type Props = {
  */
 export const ContractedSubscriptionsRow: FC<Props> = ({
   contractedSubscription,
+  handleSelectSubscription,
 }) => {
   return (
-    <button type="button" className="w-full">
+    <button
+      onClick={() =>
+        handleSelectSubscription(
+          contractedSubscription.subscriptionId
+        )
+      }
+      type="button"
+      className="w-full"
+    >
       <div className="p-2 border-t-2 border-gray-100">
         <div className="grid grid-cols-12">
           <div className="col-span-2 rounded-full bg-gray-100 aspect-square w-8 h-8 flex justify-center items-center">
